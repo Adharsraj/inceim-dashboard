@@ -34,7 +34,7 @@ export default function DashboardPageLayout({
           <Input
             type="text"
             placeholder="Search..."
-            className="w-full bg-transparent border-none focus-visible:ring-0 outline-none"
+            className="w-full bg-transparent border-none focus-visible:ring-0 outline-none shadow-none"
           />
         </div>
 
