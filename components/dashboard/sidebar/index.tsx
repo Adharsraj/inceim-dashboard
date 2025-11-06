@@ -12,7 +12,6 @@ import {
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
-  SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
@@ -33,12 +32,11 @@ import MonkeyIcon from "@/components/icons/monkey";
 import DotsVerticalIcon from "@/components/icons/dots-vertical";
 import OrganizationIcon from "@/components/icons/organization";
 import { Bullet } from "@/components/ui/bullet";
-import LockIcon from "@/components/icons/lock";
 import Image from "next/image";
 import { useActiveRoute } from "@/hooks/use-active-route";
 import { ThemeToggle } from "@/components/dashboard/theme-toggle";
 
-// This is sample data for the sidebar
+// Sidebar data
 const data = {
   navMain: [
     {
@@ -76,7 +74,7 @@ const data = {
         },
         {
           title: "Admin Settings",
-          url: "/admin",
+          url: "/not-found",
           icon: GearIcon,
           locked: false,
         },
@@ -131,39 +129,13 @@ export function DashboardSidebar({
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item) => (
-                  <SidebarMenuItem
-                    key={item.title}
-                    className={cn(
-                      item.locked && "pointer-events-none opacity-50"
-                    )}
-                    data-disabled={item.locked}
-                  >
-                    <SidebarMenuButton
-                      asChild={!item.locked}
-                      isActive={isActive(item.url)}
-                      disabled={item.locked}
-                      className={cn(
-                        "disabled:cursor-not-allowed",
-                        item.locked && "pointer-events-none"
-                      )}
-                    >
-                      {item.locked ? (
-                        <div className="flex items-center gap-3 w-full">
-                          <item.icon className="size-5" />
-                          <span>{item.title}</span>
-                        </div>
-                      ) : (
-                        <Link href={item.url}>
-                          <item.icon className="size-5" />
-                          <span>{item.title}</span>
-                        </Link>
-                      )}
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton isActive={isActive(item.url)}>
+                      <Link href={item.url} className="flex items-center gap-3">
+                        <item.icon className="size-5" />
+                        <span>{item.title}</span>
+                      </Link>
                     </SidebarMenuButton>
-                    {item.locked && (
-                      <SidebarMenuBadge>
-                        <LockIcon className="size-5 block" />
-                      </SidebarMenuBadge>
-                    )}
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
@@ -182,7 +154,7 @@ export function DashboardSidebar({
             <SidebarMenu>
               <SidebarMenuItem>
                 <Popover>
-                  <PopoverTrigger className="flex gap-0.5 w-full group cursor-pointer">
+                  <div className="flex gap-0.5 w-full group cursor-pointer">
                     <div className="shrink-0 flex size-14 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground overflow-clip">
                       <Image
                         src={data.user.avatar || "/placeholder.svg"}
@@ -209,30 +181,8 @@ export function DashboardSidebar({
                       </div>{" "}
                       <DotsVerticalIcon className="ml-2 size-4" />
                     </div>
-                  </PopoverTrigger>
-                  <PopoverContent
-                    className="w-56 p-0"
-                    side="bottom"
-                    align="end"
-                    sideOffset={4}
-                  >
-                    <div className="flex flex-col">
-                      <Link
-                        href="/profile"
-                        className="flex items-center px-4 py-2 text-sm hover:bg-accent cursor-pointer"
-                      >
-                        <MonkeyIcon className="mr-2 h-4 w-4" />
-                        Profile
-                      </Link>
-                      <Link
-                        href="/admin"
-                        className="flex items-center px-4 py-2 text-sm hover:bg-accent cursor-pointer"
-                      >
-                        <GearIcon className="mr-2 h-4 w-4" />
-                        Admin Settings
-                      </Link>
-                    </div>
-                  </PopoverContent>
+                  </div>
+                 
                 </Popover>
               </SidebarMenuItem>
             </SidebarMenu>
@@ -240,7 +190,7 @@ export function DashboardSidebar({
         </SidebarGroup>
       </SidebarFooter>
 
-      <SidebarRail />
+      {/* <SidebarRail /> */}
     </Sidebar>
   );
 }
