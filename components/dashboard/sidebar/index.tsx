@@ -129,13 +129,13 @@ export function DashboardSidebar({
             <SidebarGroupContent>
               <SidebarMenu>
                 {group.items.map((item) => (
-                  <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton isActive={isActive(item.url)}>
-                      <Link href={item.url} className="flex items-center gap-3">
+                  <SidebarMenuItem className="cursor-pointer" key={item.title}>
+                    <Link href={item.url} className="flex items-center gap-3 cursor-pointer">
+                      <SidebarMenuButton isActive={isActive(item.url)}>
                         <item.icon className="size-5" />
                         <span>{item.title}</span>
-                      </Link>
-                    </SidebarMenuButton>
+                      </SidebarMenuButton>
+                    </Link>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
@@ -179,10 +179,9 @@ export function DashboardSidebar({
                       >
                         <ThemeToggle />
                       </div>{" "}
-                      <DotsVerticalIcon className="ml-2 size-4" />
+                      {/* <DotsVerticalIcon className="ml-2 size-4" /> */}
                     </div>
                   </div>
-                 
                 </Popover>
               </SidebarMenuItem>
             </SidebarMenu>
