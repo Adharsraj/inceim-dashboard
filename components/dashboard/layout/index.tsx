@@ -37,6 +37,7 @@ export default function DashboardPageLayout({
             className="w-full bg-transparent border-none focus-visible:ring-0 outline-none shadow-none"
           />
         </div>
+        
 
         {/* User Dropdown */}
         <DropdownMenu>
